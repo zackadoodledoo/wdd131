@@ -24,12 +24,17 @@ body {
   }
   
   h2 {
-    color: #006EB6;
+    color: #006EB6; /* BYU-i Blue */
     font-size: 16px;
     letter-spacing: 1px;
     margin-top: 0;
     padding-top: 10px;
     text-transform: uppercase;
+  }
+
+  img {
+    max-width: 200px;
+    margin-top: 1em;
   }
   
   p {
@@ -46,4 +51,35 @@ body {
     width: 150px;
     margin-top: 30px;
   }
+
+  .dark {
+    background-color: #333;
+    color: white;
+  }
+  
+  .dark h2 {
+    color: #66B1E0; /* Lighter blue for contrast */
+  }
+
+  body.light {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+  }
+  
+  .logo {
+    width: 150px;
+    margin-top: 2rem;
+  }
+  
   
