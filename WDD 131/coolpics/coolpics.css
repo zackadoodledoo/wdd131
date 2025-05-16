@@ -59,7 +59,7 @@ header nav a {
 header .menu-btn {
     background: none;
     border: none;
-    color: var(--light)
+    color: var(--light);
     cursor: pointer;
 }
 
@@ -70,7 +70,9 @@ main {
 
 .gallery {
     display: grid;
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .gallery figure {
@@ -78,9 +80,16 @@ main {
 }
 
 .gallery img {
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
   object-fit: cover;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
 }
 
 
@@ -125,4 +134,58 @@ footer {
 /* Add some hover effects */
 .menu-button:hover {
     color: #007BFF;
+}
+
+/* Remember to hide the menu items by default + create a class */
+
+.hide {
+    display: none;
+
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin: 0.5em 0;
+}
+
+.image-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-viewer img {
+    width: 90%;
+    max-height: 100%;
+    margin: 20vh auto 0;
+    display: block;
+}
+
+.image-viewer .close-viewer {
+    position: absolute;
+    top: 20vh;
+    right: 5%;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.image-viewer:not([open]) {
+    display: none;
 }
