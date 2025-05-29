@@ -26,11 +26,11 @@ html {
 }
 
 body {
-    margin: 0;
-    font-family: var(--body-font);
-    line-height: 1.6;
-    color: var(--dark); 
-    background-color: var(--light); /* Light background */
+  margin: 0;
+  font-family: var(--body-font);
+  line-height: 1.6;
+  color: var(--dark); 
+  background-color: var(--light);
 }
 
 /* ===========================
@@ -48,14 +48,14 @@ h2 {
   font-family: var(--heading-font);
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
-  color: var(--dark); /* Add this line */
+  color: var(--dark);
 }
 
 p {
   margin-bottom: 1rem;
   color: var(--dark);
   text-align: center;
-  padding: 2rem 1rem 1rem; /* extra top padding for spacing */
+  padding: 2rem 1rem 1rem;
 }
 
 a {
@@ -96,14 +96,14 @@ header {
   background-color: var(--dark);
   color: var(--dark);
   text-align: center;
-  padding: 2rem 1rem 1rem; /* extra top padding for spacing */
+  padding: 2rem 1rem 1rem;
 }
 
 header h1 {
-    font-family: var(--heading-font);
-    font-size: 3rem;         /* ↑ bump up title size */
-    margin: 0;
-    line-height: 1.1;
+  font-family: var(--heading-font);
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1.1;
 }
 
 header nav ul {
@@ -123,31 +123,30 @@ header nav li a {
   display: block;
 }
 
-/* === Navigation Section === */
 nav {
-    background-color: #fff;
-    border-top: 4px solid var(--gold);    /* ↑ thick gold lines */
-    border-bottom: 4px solid var(--gold);
-    padding: 1.5rem 0;                     /* ↑ increase navbar height */
+  background-color: #fff;
+  border-top: 4px solid var(--gold);
+  border-bottom: 4px solid var(--gold);
+  padding: 1.5rem 0;
 }
 
 nav ul {
-      display: grid;
-      grid-template-columns: repeat(3, auto);
-      justify-content: end;                 /* push items to the right */
-      justify-items: end;
-      gap: 2rem;                             /* space between links */
-      list-style: none;                     /* remove bullets */
-      max-width: 800px;                     /* prevent going full width */
-      margin: 0 auto;                       /* center the block */
-      padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: end;
+  justify-items: end;
+  gap: 2rem;
+  list-style: none;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 nav li a {
-    font-size: 1.25rem;                   /* ↑ larger link text */
-    color: var(--red);
-    text-decoration: none;
-    font-weight: bold;
+  font-size: 1.25rem;
+  color: var(--red);
+  text-decoration: none;
+  font-weight: bold;
 }
 
 nav li a:hover,
@@ -163,7 +162,7 @@ main {
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
   padding: 2rem;
-  max-width: auto;
+  max-width: 800px; /* Match navbar width */
   margin: 0 auto;
 }
 
@@ -172,7 +171,7 @@ main {
    =========================== */
 .posts {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem; /* More space between articles */
 }
 
 .post {
@@ -190,10 +189,26 @@ main {
   color: var(--dark);
 }
 
+/* Enlarged date font */
 .post-meta time {
+  font-size: 1.1rem;
   font-weight: bold;
   display: block;
   margin-bottom: 0.5rem;
+}
+
+/* Right-align list and reduce spacing */
+.post-meta ul {
+  list-style: none;
+  padding: 0 1rem;
+  border-right: 1px solid #ddd;
+  margin: 0;
+}
+
+.post-meta ul li {
+  text-align: right;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
 }
 
 .post-meta p {
@@ -201,13 +216,14 @@ main {
 }
 
 .post-content h2 {
-  margin-top: 0;
+  margin-top: 0.2rem; /* Align with date */
 }
 
 .post-content img {
+  display: block;
+  margin: 0.5rem auto 1rem;
   max-width: 100%;
   height: auto;
-  margin-bottom: 0.5rem;
 }
 
 /* ===========================
@@ -235,5 +251,3 @@ footer p {
   font-size: 0.9rem;
   color: var(--dark);
 }
-
-
