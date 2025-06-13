@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  padding: 1em;
+  background: #006622;
+  text-align: center;
+}
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+.testbox {
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+form {
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px #006622;
+}
+
+fieldset {
+  margin-bottom: 2em;
+  border: none;
+}
+
+input,
+select,
+textarea {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.item {
+  margin-bottom: 15px;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.columns .item {
+  flex: 1 1 48%;
+}
+
+button {
+  padding: 10px 20px;
+  background: #006622;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 0.5em 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00b33c;
+}
+
+.btn-block {
+  text-align: center;
+}
+
+#participantsFieldset {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.participant {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+#removeParticipantBtn {
+  display: none;
+}
+
+.hide {
+  display: none;
+}
+
+@media (max-width: 568px) {
+  .columns .item {
+    flex: 1 1 100%;
+  }
+}
+@media (max-width: 768px) {
+  .columns .item {
+    flex: 1 1 100%;
+  }
+}
