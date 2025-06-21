@@ -13,7 +13,7 @@ recipes.forEach(recipe => {
   card.innerHTML = `
     <img src="${recipe.image}" alt="${recipe.title}" />
     <div class="recipe-content">
-      <h2>${recipe.title}</h2>
+      <h2>${recipe.name}</h2>
       <p>${recipe.description}</p>
       <span class="rating" role="img" aria-label="Rating: ${recipe.rating} out of 5 stars">
         <span aria-hidden="true">${filledStars}${emptyStars}</span>
