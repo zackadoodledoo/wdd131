@@ -308,7 +308,7 @@ body {
         }
 
         .header-btn {
-            background-color: #555;
+            background-color: #a7333f;
             color: white;
             padding: 0.5rem 1rem;
             border: none;
@@ -335,18 +335,12 @@ body {
         .hero-placeholder {
             width: 80px;
             height: 60px;
-            background-color: #999;
+            background-color: #a7333f;
             border-radius: 8px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .hero-placeholder::before {
-            content: "🏔️";
-            font-size: 24px;
-            color: white;
         }
 
         /* Main Content */
@@ -376,7 +370,7 @@ body {
             background-image: url('https://i.ibb.co/RpbgKxnQ/date-night-logo.png');
             width: 80px;
             height: 60px;
-            background-color: #999;
+            background-color: #a7333f;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -410,7 +404,7 @@ body {
         .form-input {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid #ddd;
+            border: 2px solid #a7333f;
             border-radius: 4px;
             font-size: 1rem;
             transition: border-color 0.3s;
@@ -426,7 +420,7 @@ body {
         }
 
         .generate-btn {
-            background-color: #555;
+            background-color: #a7333f;
             color: white;
             padding: 0.75rem 2rem;
             border: none;
