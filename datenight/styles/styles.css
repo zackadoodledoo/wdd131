@@ -364,7 +364,7 @@ body {
         }
 
         .side-image {
-            background-color: #d0d0d0;
+            background-color: #c52233;
             height: 300px;
             border-radius: 8px;
             display: flex;
@@ -373,6 +373,7 @@ body {
         }
 
         .image-placeholder {
+            background-image: url('https://i.ibb.co/RpbgKxnQ/date-night-logo.png');
             width: 80px;
             height: 60px;
             background-color: #999;
@@ -382,11 +383,7 @@ body {
             justify-content: center;
         }
 
-        .image-placeholder::before {
-            content: "🏔️";
-            font-size: 24px;
-            color: white;
-        }
+        
 
         /* Form Section */
         .form-section {
@@ -481,7 +478,7 @@ body {
 
         .footer-nav a {
             text-decoration: none;
-            color: #666;
+            color: #c52233;
             transition: color 0.3s;
         }
 
