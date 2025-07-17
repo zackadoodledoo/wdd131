@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Planning Website</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stayin.html">Stay In</a></li>
+                <li><a href="goingout.html">Go Out</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <button class="header-btn" onclick="generateDate()">Generate Date</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-image"></div>
+    <img src="https://i.ibb.co/7dnkvphv/hand-drawn-valentine-s-day-couple-set.png" alt="hand-drawn-valentine-s-day-couple-set" border="0"></a>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="content-section">
+            <div class="side-image">
+                <div class="image-placeholder"></div>
+            </div>
+            
+            <div class="form-section">
+                <h1 class="form-title">Create Your Date</h1>
+                <div class="form-container">
+                    <div class="form-group">
+                        <input type="text" id="location" class="form-input" placeholder="Stay In or Go Out?">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="homeActivity" class="form-input" placeholder="Dinner at Home?">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="outActivity" class="form-input" placeholder="Dinner out on the town?">
+                    </div>
+                    <button class="generate-btn" onclick="generateDate()">Generate your date!</button>
+                    <div id="dateResult" class="date-result"></div>
+                    <div class="disclaimer">
+                        Be ready to have fun!<br>
+                        ***Fun is subject to your attitudes****
+                    </div>
+                </div>
+            </div>
+            
+            <div class="side-image">
+                <div class="image-placeholder"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+     <nav class="navbar">
+      <div class="logo"></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="stayin.html">Stay In</a>
+        <a href="goout.html">Go Out</a>
+        <a href="about.html">About</a>
+        <div class="social-icons">
+        <img src="https://i.ibb.co/bg2CDTyy/icons8-instagram-48.png" alt="instagram-logo" border="0"></a><img src="https://i.ibb.co/w313QSQ/icons8-facebook-48.png" alt="facebook-logo" border="0"></a><img src="https://i.ibb.co/rRhbzsj0/icons8-x-48-2.png" alt="icons8-x-48-2" border="0"></a>
+        </div>
+      </div>
+    </nav>
+    <div class="footer-bottom">
+      <p class="colored">&copy; Zackary Sinclair, 2025 Date Night Creator. All rights reserved.</p>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </footer>
+
+    <script>
+        // Date ideas database
+        const dateIdeas = {
+            stayIn: {
+                activities: [
+                    "Cook a romantic dinner together",
+                    "Have a movie marathon with popcorn",
+                    "Play board games or card games",
+                    "Do a wine or cocktail tasting",
+                    "Have a spa night with face masks",
+                    "Build a blanket fort",
+                    "Try a new hobby together",
+                    "Have a themed dinner night",
+                    "Do a puzzle together",
+                    "Have a dance party in the living room"
+                ],
+                meals: [
+                    "Homemade pasta with wine",
+                    "Taco bar with all the fixings",
+                    "Sushi making night",
+                    "Pizza from scratch",
+                    "Breakfast for dinner",
+                    "Fondue night",
+                    "BBQ on the balcony/backyard",
+                    "Themed cuisine (Italian, Mexican, etc.)",
+                    "Comfort food favorites",
+                    "Healthy meal prep together"
+                ]
+            },
+            goOut: {
+                activities: [
+                    "Go to a local museum or art gallery",
+                    "Take a scenic walk in the park",
+                    "Visit a farmers market",
+                    "Go bowling or mini golf",
+                    "Attend a live music event",
+                    "Go to a comedy show",
+                    "Visit a local brewery or winery",
+                    "Go dancing at a nice venue",
+                    "Take a cooking class",
+                    "Go to a sports game or event"
+                ],
+                meals: [
+                    "Try a new restaurant you've never been to",
+                    "Go for brunch at a cozy cafe",
+                    "Have dinner at a rooftop restaurant",
+                    "Visit a food truck festival",
+                    "Go to a steakhouse for a special meal",
+                    "Try ethnic cuisine you've never had",
+                    "Go to a wine bar with small plates",
+                    "Have a picnic in a beautiful location",
+                    "Visit a dessert place for something sweet",
+                    "Go to a restaurant with live entertainment"
+                ]
+            }
+        };
+
+        // Time suggestions
+        const timeSlots = [
+            "7:00 PM - 9:00 PM",
+            "6:30 PM - 8:30 PM",
+            "7:30 PM - 9:30 PM",
+            "6:00 PM - 8:00 PM",
+            "8:00 PM - 10:00 PM",
+            "5:30 PM - 7:30 PM"
+        ];
+
+        // Generate random date idea
+        function generateDate() {
+            const locationInput = document.getElementById('location').value.toLowerCase();
+            const homeActivityInput = document.getElementById('homeActivity').value.toLowerCase();
+            const outActivityInput = document.getElementById('outActivity').value.toLowerCase();
+            const resultDiv = document.getElementById('dateResult');
+            const button = document.querySelector('.generate-btn');
+
+            // Show loading state
+            button.classList.add('loading');
+            button.disabled = true;
+            resultDiv.classList.remove('show');
+
+            // Simulate loading time
+            setTimeout(() => {
+                let selectedActivity, selectedMeal, activityType;
+
+                // Determine if staying in or going out
+                if (locationInput.includes('stay') || locationInput.includes('in') || locationInput.includes('home')) {
+                    activityType = 'stayIn';
+                } else if (locationInput.includes('go') || locationInput.includes('out') || locationInput.includes('town')) {
+                    activityType = 'goOut';
+                } else {
+                    // Random selection if unclear
+                    activityType = Math.random() > 0.5 ? 'stayIn' : 'goOut';
+                }
+
+                // Get random activity and meal
+                const activities = dateIdeas[activityType].activities;
+                const meals = dateIdeas[activityType].meals;
+                
+                selectedActivity = activities[Math.floor(Math.random() * activities.length)];
+                selectedMeal = meals[Math.floor(Math.random() * meals.length)];
+
+                // Consider user preferences
+                if (homeActivityInput && activityType === 'stayIn') {
+                    if (homeActivityInput.includes('cook') || homeActivityInput.includes('dinner')) {
+                        selectedActivity = "Cook a romantic dinner together";
+                    } else if (homeActivityInput.includes('movie')) {
+                        selectedActivity = "Have a movie marathon with popcorn";
+                    }
+                }
+
+                if (outActivityInput && activityType === 'goOut') {
+                    if (outActivityInput.includes('restaurant') || outActivityInput.includes('dinner')) {
+                        selectedMeal = "Try a new restaurant you've never been to";
+                    } else if (outActivityInput.includes('town') || outActivityInput.includes('explore')) {
+                        selectedActivity = "Take a scenic walk in the park";
+                    }
+                }
+
+                // Random time slot
+                const selectedTime = timeSlots[Math.floor(Math.random() * timeSlots.length)];
+
+                // Display result
+                const locationText = activityType === 'stayIn' ? 'Stay In' : 'Go Out';
+                
+                resultDiv.innerHTML = `
+                    <h3>🎉 Your Perfect Date Plan!</h3>
+                    <p><strong>Location:</strong> ${locationText}</p>
+                    <p><strong>Activity:</strong> ${selectedActivity}</p>
+                    <p><strong>Food:</strong> ${selectedMeal}</p>
+                    <p class="date-time"><strong>Suggested Time:</strong> ${selectedTime}</p>
+                `;
+
+                resultDiv.classList.add('show');
+                
+                // Reset button
+                button.classList.remove('loading');
+                button.disabled = false;
+            }, 1500);
+        }
+
+        // Add enter key support
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateDate();
+            }
+        });
+
+        // Add some interactive feedback to form inputs
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+    
+</body>
+</html>

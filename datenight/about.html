@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Date Night Creator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sofia', serif;
+            line-height: 1.6;
+            color: #C52233;
+            background: linear-gradient(45deg, #480a19, #a51c30);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 60px;
+            border: 1px solid #a7333f;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-card h2 {
+            font-size: 2rem;
+            color: #C52233;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .content-card h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #480a19, #a51c30);
+            border-radius: 2px;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            color: #C52233;
+            margin-bottom: 15px;
+        }
+
+        .team-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 2.5rem;
+            color: #C52233;
+            margin-bottom: 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #480a19, #a51c30);
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .team-member .role {
+            font-style: italic;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: #a7333f;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid #74121d;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #480a19, #a51c30);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"></div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="stayin.html">Stay In</a>
+                <a href="goout.html">Go Out</a>
+                <a href="about.html">About</a>
+            </div>
+        </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>About Date Night Creator</h1>
+            <p>Crafting unforgettable moments and bringing couples closer together, one perfect date at a time.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <h2>Our Story</h2>
+                <p>Born from the simple belief that love deserves to be celebrated every day, Date Night Creator was founded by a team of hopeless romantics who understand that the best relationships are built on shared experiences and quality time together.</p>
+                <p>After countless conversations with couples who felt stuck in routine, we realized there was a need for fresh, creative, and personalized date ideas that fit every budget, schedule, and personality.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>Our Mission</h2>
+                <p>We're on a mission to eliminate the "What should we do tonight?" dilemma forever. Our platform uses smart algorithms and personal preferences to generate unique, tailored date experiences that spark joy, laughter, and deeper connections.</p>
+                <p>Whether you're celebrating your first date or your 50th anniversary, we believe every moment together should be special and memorable.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>What We Offer</h2>
+                <p>From cozy at-home activities to adventurous outdoor excursions, our curated collection of date ideas spans every interest, budget, and time constraint. We provide detailed guides, local recommendations, and even backup plans for when things don't go as expected.</p>
+                <p>Our platform learns from your preferences and feedback to continuously improve and personalize your experience.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>Why Choose Us</h2>
+                <p>We're not just another suggestion app – we're your personal romance consultants. Our team of relationship experts, local experience curators, and technology innovators work together to ensure every date idea is meaningful and achievable.</p>
+                <p>We understand that great relationships take effort, and we're here to make that effort feel effortless and fun.</p>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2>Meet Our Team</h2>
+            <p>A passionate group of romantics, developers, and relationship enthusiasts dedicated to helping love flourish.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Zackary Sinclair</h3>
+                    <div class="role">Founder & Chief Romance Officer</div>
+                    <p>Former relationship counselor turned tech entrepreneur with a passion for meaningful connections.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Create Magic Together?</h2>
+            <p>Join thousands of couples who have discovered the joy of perfectly planned date nights.</p>
+            <a href="goout.html" class="cta-button">Let's Go!</a>
+        </div>
+    </div>
+
+    <script>
+
+        // Add hover effects to content cards
+        const cards = document.querySelectorAll('.content-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.background = 'rgba(255, 255, 255, 1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'rgba(255, 255, 255, 0.95)';
+            });
+        });
+    </script>
+</body>
+</html>

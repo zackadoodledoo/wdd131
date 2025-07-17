@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta author="Zackary Sinclair">
+    <meta content="Date Night Planner - Create the perfect date night based on your preferences. Choose location, activity type, dining options, and more to get personalized suggestions.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Night Planner</title>
+    <link rel="stylesheet" href="styles/date-planner-styles.css">
+        
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+        <div class="logo"></div>
+        <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="stayin.html">Stay In</a>
+        <a href="goingout.html">Go Out</a>
+        <a href="about.html">About</a>
+        <button class="header-btn" a href="goingout.html">Generate Date</a>
+
+      </div>
+    </nav>
+    </header>
+    <div class="planner-container">
+        <h1> Date Night Planner </h1>
+        
+        <div class="preference-section">
+            <h2> Where would you like to spend your date?</h2>
+            <div class="button-group">
+                <button class="btn" data-preference="location" data-value="stay-in">Stay In</button>
+                <button class="btn" data-preference="location" data-value="go-out">Go Out</button>
+                <button class="btn" data-preference="location" data-value="both">Surprise Me</button>
+            </div>
+        </div>
+
+        <div class="preference-section">
+            <h2>Family Situation</h2>
+            <div class="button-group">
+                <button class="btn" data-preference="family" data-value="family-friendly">Family-Friendly</button>
+                <button class="btn" data-preference="family" data-value="romantic">Adults Only</button>
+                <button class="btn" data-preference="family" data-value="both">Either</button>
+            </div>
+        </div>
+
+        <div class="preference-section">
+            <h2>Activity Type</h2>
+            <div class="button-group">
+                <button class="btn" data-preference="activity" data-value="relaxed">Relaxed</button>
+                <button class="btn" data-preference="activity" data-value="active">Active</button>
+                <button class="btn" data-preference="activity" data-value="creative">Creative</button>
+                <button class="btn" data-preference="activity" data-value="adventurous">Adventurous</button>
+            </div>
+        </div>
+
+        <div class="preference-section">
+            <h2>Dining Preferences</h2>
+            <div class="form-group">
+                <label for="budget">Budget Range:</label>
+                <select id="budget">
+                    <option value="">Select Budget</option>
+                    <option value="low">Budget-Friendly ($)</option>
+                    <option value="medium">Moderate ($$)</option>
+                    <option value="high">Splurge ($$$)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="dietary">Dietary Restrictions:</label>
+                <input type="text" id="dietary" placeholder="e.g., vegetarian, gluten-free, etc.">
+            </div>
+            
+            <div class="form-group">
+                <label>Cuisine Preferences:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="italian" value="italian">
+                        <label for="italian">Italian</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="asian" value="asian">
+                        <label for="asian">Asian</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mexican" value="mexican">
+                        <label for="mexican">Mexican</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="american" value="american">
+                        <label for="american">American</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mediterranean" value="mediterranean">
+                        <label for="mediterranean">Mediterranean</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn">Generate Perfect Date Night!</button>
+
+        <div class="recommendations" id="recommendations">
+            <div class="loading" id="loading">Crafting your perfect date night...</div>
+            <div id="results"></div>
+        </div>
+
+        <button class="reset-btn" id="resetBtn">Reset Date Night Selections</button>
+    </div>
+
+    <script>
+        // Store user preferences
+        let preferences = {
+            location: '',
+            family: '',
+            activity: '',
+            budget: '',
+            dietary: '',
+            cuisines: []
+        };
+
+        // Date night suggestions database
+        const dateIdeas = {
+            'stay-in': {
+                'family-friendly': {
+                    'relaxed': [
+                        'Family movie night with homemade popcorn and cozy blankets',
+                        'Board game tournament with prizes for winners',
+                        'Indoor camping with tents and s\'mores made over the stove',
+                        'Cooking a special dinner together as a family',
+                        'Arts and crafts session making family memories'
+                    ],
+                    'active': [
+                        'Dance party in the living room with everyone\'s favorite songs',
+                        'Indoor obstacle course challenge',
+                        'Workout session with kid-friendly exercises',
+                        'Cleaning and redecorating a room together',
+                        'Playing active video games that get everyone moving'
+                    ],
+                    'creative': [
+                        'Family art project creating a mural or collage',
+                        'Cooking or baking challenge with unique recipes',
+                        'DIY home improvement project',
+                        'Creating a family time capsule',
+                        'Writing and performing a family play or skit'
+                    ],
+                    'adventurous': [
+                        'Themed dinner night with costumes and decorations',
+                        'Mystery dinner party with clues and puzzles',
+                        'Trying exotic foods from different cultures',
+                        'Indoor treasure hunt with exciting prizes',
+                        'Learning a new skill together online'
+                    ]
+                },
+                'romantic': {
+                    'relaxed': [
+                        'Candlelit dinner at home with your favorite wine',
+                        'Couples massage with essential oils and soft music',
+                        'Stargazing from your backyard or balcony',
+                        'Wine tasting with cheese and chocolate pairings',
+                        'Cuddling while watching a romantic movie marathon'
+                    ],
+                    'active': [
+                        'Partner yoga session with online guidance',
+                        'Dancing to your favorite songs in the living room',
+                        'Workout together with a couples fitness routine',
+                        'Rearranging furniture to create a new room layout',
+                        'Sensual cooking class following along with a chef'
+                    ],
+                    'creative': [
+                        'Painting portraits of each other',
+                        'Creating a photo album of your relationship memories',
+                        'Writing love letters to read in the future',
+                        'Designing and building something together',
+                        'Learning a new hobby or skill as a couple'
+                    ],
+                    'adventurous': [
+                        'Cooking an elaborate meal from a cuisine you\'ve never tried',
+                        'Role-playing a fantasy date in your own home',
+                        'Blindfolded taste testing of exotic foods',
+                        'Learning a new language together',
+                        'Planning your dream vacation in detail'
+                    ]
+                }
+            },
+            'go-out': {
+                'family-friendly': {
+                    'relaxed': [
+                        'Picnic in the park with homemade sandwiches and games',
+                        'Visit to a local museum or science center',
+                        'Casual dinner at a family-friendly restaurant',
+                        'Walk through a botanical garden or nature trail',
+                        'Afternoon at the library followed by ice cream'
+                    ],
+                    'active': [
+                        'Mini golf or bowling together',
+                        'Hiking on an easy family trail',
+                        'Playing at a local playground or park',
+                        'Bike ride through the neighborhood',
+                        'Visit to a trampoline park or climbing gym'
+                    ],
+                    'creative': [
+                        'Pottery painting or art class',
+                        'Visit to a hands-on children\'s museum',
+                        'Farmers market tour with cooking ingredients',
+                        'Photography walk around your city',
+                        'Crafting workshop or DIY class'
+                    ],
+                    'adventurous': [
+                        'Geocaching adventure around town',
+                        'Trying a new type of cuisine restaurant',
+                        'Visiting a petting zoo or farm',
+                        'Exploring a new neighborhood or town',
+                        'Attending a local festival or fair'
+                    ]
+                },
+                'romantic': {
+                    'relaxed': [
+                        'Fine dining at an upscale restaurant',
+                        'Wine tasting at a local vineyard',
+                        'Sunset dinner cruise or lakeside meal',
+                        'Couples spa day with massages and treatments',
+                        'Jazz club or intimate live music venue'
+                    ],
+                    'active': [
+                        'Couples hiking with a scenic view',
+                        'Dancing at a salsa or swing club',
+                        'Rock climbing or bouldering together',
+                        'Kayaking or paddleboarding on a lake',
+                        'Tennis or badminton at a local court'
+                    ],
+                    'creative': [
+                        'Art gallery opening or museum exhibition',
+                        'Cooking class for couples',
+                        'Wine and paint night',
+                        'Live theater performance or concert',
+                        'Photography workshop or tour'
+                    ],
+                    'adventurous': [
+                        'Hot air balloon ride over scenic landscapes',
+                        'Trying an extreme sport like skydiving or bungee jumping',
+                        'Exploring a new city or town for the day',
+                        'Taking a spontaneous road trip',
+                        'Going to an escape room or mystery dinner'
+                    ]
+                }
+            }
+        };
+
+        // Food suggestions based on budget and cuisine
+        const foodSuggestions = {
+            low: {
+                italian: ['Homemade pasta with marinara sauce', 'Pizza night with favorite toppings'],
+                asian: ['Stir-fry with rice and vegetables', 'Homemade sushi rolls'],
+                mexican: ['Taco bar with all the fixings', 'Quesadillas with fresh salsa'],
+                american: ['Burgers and fries', 'BBQ sandwiches with coleslaw'],
+                mediterranean: ['Greek salad with pita bread', 'Hummus and veggie platter']
+            },
+            medium: {
+                italian: ['Risotto with wine pairing', 'Osso buco with polenta'],
+                asian: ['Hibachi dinner with sake', 'Thai curry with jasmine rice'],
+                mexican: ['Carnitas with craft margaritas', 'Mole with traditional sides'],
+                american: ['Steak dinner with sides', 'Gourmet mac and cheese'],
+                mediterranean: ['Lamb with roasted vegetables', 'Seafood paella']
+            },
+            high: {
+                italian: ['Truffle pasta at an upscale restaurant', 'Multi-course Italian tasting menu'],
+                asian: ['Omakase sushi experience', 'High-end ramen with premium ingredients'],
+                mexican: ['Fine dining Mexican with mezcal pairings', 'Elevated street food experience'],
+                american: ['Dry-aged steakhouse dinner', 'Farm-to-table tasting menu'],
+                mediterranean: ['Mediterranean fine dining', 'Wine country dinner with pairings']
+            }
+        };
+
+        // Event listeners for preference buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle preference button clicks
+            document.querySelectorAll('.btn[data-preference]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const preference = this.getAttribute('data-preference');
+                    const value = this.getAttribute('data-value');
+                    
+                    // Remove active class from other buttons in the same group
+                    document.querySelectorAll(`.btn[data-preference="${preference}"]`).forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Store preference
+                    preferences[preference] = value;
+                });
+            });
+
+            // Handle generate button click
+            document.getElementById('generateBtn').addEventListener('click', generateDateNight);
+
+            // Handle reset button click
+            document.getElementById('resetBtn').addEventListener('click', resetForm);
+
+            // Handle budget selection
+            document.getElementById('budget').addEventListener('change', function() {
+                preferences.budget = this.value;
+            });
+
+            // Handle dietary restrictions
+            document.getElementById('dietary').addEventListener('input', function() {
+                preferences.dietary = this.value;
+            });
+
+            // Handle cuisine checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        preferences.cuisines.push(this.value);
+                    } else {
+                        preferences.cuisines = preferences.cuisines.filter(cuisine => cuisine !== this.value);
+                    }
+                });
+            });
+        });
+
+        function generateDateNight() {
+            const resultsDiv = document.getElementById('results');
+            const recommendationsDiv = document.getElementById('recommendations');
+            const loadingDiv = document.getElementById('loading');
+            
+            // Show loading
+            recommendationsDiv.classList.add('show');
+            loadingDiv.classList.add('show');
+            resultsDiv.innerHTML = '';
+            
+            // Simulate loading time
+            setTimeout(() => {
+                loadingDiv.classList.remove('show');
+                
+                // Generate suggestions
+                const suggestions = createDateSuggestions();
+                displaySuggestions(suggestions);
+            }, 1500);
+        }
+
+        function createDateSuggestions() {
+            const suggestions = [];
+            
+            // Determine location
+            const location = preferences.location || 'both';
+            const family = preferences.family || 'both';
+            const activity = preferences.activity || 'relaxed';
+            
+            // Get activity suggestions
+            const locations = location === 'both' ? ['stay-in', 'go-out'] : [location];
+            const families = family === 'both' ? ['family-friendly', 'romantic'] : [family];
+            
+            locations.forEach(loc => {
+                families.forEach(fam => {
+                    if (dateIdeas[loc] && dateIdeas[loc][fam] && dateIdeas[loc][fam][activity]) {
+                        const ideas = dateIdeas[loc][fam][activity];
+                        const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
+                        suggestions.push({
+                            type: 'activity',
+                            location: loc,
+                            family: fam,
+                            activity: activity,
+                            suggestion: randomIdea
+                        });
+                    }
+                });
+            });
+            
+            // Get food suggestions
+            if (preferences.budget && preferences.cuisines.length > 0) {
+                const randomCuisine = preferences.cuisines[Math.floor(Math.random() * preferences.cuisines.length)];
+                if (foodSuggestions[preferences.budget] && foodSuggestions[preferences.budget][randomCuisine]) {
+                    const foods = foodSuggestions[preferences.budget][randomCuisine];
+                    const randomFood = foods[Math.floor(Math.random() * foods.length)];
+                    suggestions.push({
+                        type: 'food',
+                        cuisine: randomCuisine,
+                        budget: preferences.budget,
+                        suggestion: randomFood
+                    });
+                }
+            }
+            
+            return suggestions;
+        }
+
+        function displaySuggestions(suggestions) {
+            const resultsDiv = document.getElementById('results');
+            
+            if (suggestions.length === 0) {
+                resultsDiv.innerHTML = '<p>Please select some preferences to get personalized date night suggestions!</p>';
+                return;
+            }
+            
+            let html = '<h3>Your Perfect Date Night Suggestions:</h3>';
+            
+            suggestions.forEach((suggestion, index) => {
+                html += `<div class="date-suggestion">`;
+                
+                if (suggestion.type === 'activity') {
+                    html += `<h3>${suggestion.location === 'stay-in' ? '🏠' : '🌟'} ${suggestion.family === 'family-friendly' ? 'Family' : 'Romantic'} ${capitalizeFirst(suggestion.activity)} Activity</h3>`;
+                    html += `<p><strong>Suggestion:</strong> ${suggestion.suggestion}</p>`;
+                } else if (suggestion.type === 'food') {
+                    html += `<h3>🍽️ ${capitalizeFirst(suggestion.cuisine)} Dining (${getBudgetEmoji(suggestion.budget)})</h3>`;
+                    html += `<p><strong>Food Suggestion:</strong> ${suggestion.suggestion}</p>`;
+                    if (preferences.dietary) {
+                        html += `<p><strong>Dietary Notes:</strong> Make sure to request ${preferences.dietary} options</p>`;
+                    }
+                }
+                
+                html += `</div>`;
+            });
+            
+            resultsDiv.innerHTML = html;
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function getBudgetEmoji(budget) {
+            const budgetEmojis = {
+                low: '$',
+                medium: '$$',
+                high: '$$$'
+            };
+            return budgetEmojis[budget] || '$';
+        }
+
+        function resetForm() {
+            // Reset preferences
+            preferences = {
+                location: '',
+                family: '',
+                activity: '',
+                budget: '',
+                dietary: '',
+                cuisines: []
+            };
+            
+            // Reset UI
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById('budget').value = '';
+            document.getElementById('dietary').value = '';
+            
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            document.getElementById('recommendations').classList.remove('show');
+            document.getElementById('results').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
