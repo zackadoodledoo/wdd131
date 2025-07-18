@@ -24,7 +24,7 @@
   ); /* paragraph text on a white background */
   --paragraph-color-on-color: white; /* paragraph text on a colored background */
   --paragraph-background-color: var(--primary-color);
-  --nav-link-color: var(--primary-color);
+  --nav-link-color: white;
   --nav-background-color: var(--accent3-color);
   --nav-hover-link-color: white;
   --nav-hover-background-color: var(--primary-color);
